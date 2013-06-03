@@ -28,5 +28,5 @@ requires:
   perl: 5.14.0
 resources:
   license: http://opensource.org/licenses/mit-license.php
-  repository: https://github.com/sekia/Algorithm-LibLinear
-version: 0.05
+  repository: git://github.com/sekia/Algorithm-LibLinear.git
+version: 0.06
