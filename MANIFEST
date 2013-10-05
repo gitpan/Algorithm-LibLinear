@@ -18,6 +18,7 @@ inc/Test/LeakTrace.pm
 inc/Test/More.pm
 lib/Algorithm/LibLinear.pm
 lib/Algorithm/LibLinear/DataSet.pm
+lib/Algorithm/LibLinear/FeatureScaling.pm
 lib/Algorithm/LibLinear/Model.pm
 lib/Algorithm/LibLinear/ScalingParameter.pm
 lib/Algorithm/LibLinear/Types.pm
@@ -39,6 +40,7 @@ src/liblinear/tron.h
 src/typemap
 t/Algorithm/LibLinear.t
 t/Algorithm/LibLinear/DataSet.t
+t/Algorithm/LibLinear/FeatureScaling.t
 t/Algorithm/LibLinear/Problem.t
 t/Algorithm/LibLinear/ScalingParameter.t
 t/Algorithm/LibLinear/TrainingParameter.t

@@ -1,5 +1,5 @@
 ---
-abstract: 'A Perl binding for LIBLINEAR.'
+abstract: 'A Perl binding for LIBLINEAR, a library for classification/regression using linear SVM and logistic regression.'
 author:
   - 'Koichi SATOH <sato@seesaa.co.jp>'
 build_requires:
@@ -8,6 +8,10 @@ configure_requires:
   Devel::PPPort: 3.19
   ExtUtils::MakeMaker: 6.59
   ExtUtils::ParseXS: 2.21
+  Module::Install: 0
+  Module::Install::AuthorTests: 0
+  Module::Install::Repository: 0
+  Module::Install::XSUtil: 0
 distribution_type: module
 dynamic_config: 1
 generated_by: 'Module::Install version 1.06'
@@ -29,4 +33,4 @@ requires:
 resources:
   license: http://opensource.org/licenses/mit-license.php
   repository: git://github.com/sekia/Algorithm-LibLinear.git
-version: 0.06
+version: 0.07

@@ -1,15 +1,13 @@
 use Algorithm::LibLinear::DataSet;
-use Algorithm::LibLinear::ScalingParameter;
+use Algorithm::LibLinear::FeatureScaling;
 use Test::Exception::LessClever;
 use Test::More;
 
-local $Algorithm::LibLinear::SUPRESS_DEPRECATED_WARNING = 1;
-
 my $data_set = Algorithm::LibLinear::DataSet->load(fh => \*DATA);
-my $parameter = new_ok 'Algorithm::LibLinear::ScalingParameter' => [
-    data_set => $data_set
+my $scale = new_ok 'Algorithm::LibLinear::FeatureScaling' => [
+    data_set => $data_set,
 ];
-ok my $scaled_data_set = $data_set->scale(parameter => $parameter);
+ok my $scaled_data_set = $scale->scale(data_set => $data_set);
 is $scaled_data_set->size, $data_set->size;
 
 {
@@ -17,8 +15,8 @@ is $scaled_data_set->size, $data_set->size;
   VALUE_RANGE_CHECK:
     for my $scaled_data (@{ $scaled_data_set->as_arrayref }) {
         for my $value (values %{ $scaled_data->{feature} }) {
-            unless ($parameter->lower_bound <= $value
-                        and $value <= $parameter->upper_bound) {
+            unless ($scale->lower_bound <= $value
+                        and $value <= $scale->upper_bound) {
                 $scaled_within_range = 0;
                 last VALUE_RANGE_CHECK;
             }
@@ -53,7 +51,7 @@ is $scaled_data_set->size, $data_set->size;
     );
     lives_and {
         my $scaled_data_set =
-            $data_set_with_additional_feature->scale(parameter => $parameter);
+            $scale->scale(data_set => $data_set_with_additional_feature);
         my $scaled_feature = $scaled_data_set->as_arrayref->[0]{feature};
         is 0 + keys %$scaled_feature, 3,
             'New feature should be ommited since scaling factor is unknown.';
@@ -68,20 +66,19 @@ is $scaled_data_set->size, $data_set->size;
             +{ feature => +{ 2 => 1 }, label => 1 },
         ]
     );
-    my $scaling_parameter = Algorithm::LibLinear::ScalingParameter->new(
+    my $scale = Algorithm::LibLinear::FeatureScaling->new(
         data_set => $data_set,
         lower_bound => -1,
         upper_bound => 1,
     );
-    my $scaled_data_set = $data_set->scale(parameter => $scaling_parameter);
-    my @scaled_features =
-        map { $_->{feature} } @{ $scaled_data_set->as_arrayref };
+    my $scaled_data_set = $scale->scale(data_set => $data_set);
+    my @scaled_features = @{ $scaled_data_set->as_arrayref };
     is_deeply(
         \@scaled_features,
         [
-            +{ 1 => 1, 2 => -1, 3 => 1 },
-            +{ 1 => -1, 2 => 1, 3 => -1 },
-            +{ 1 => -1, 3 => -1 },
+            +{ feature => +{ 1 => 1, 2 => -1, 3 => 1 }, label => 1 },
+            +{ feature => +{ 1 => -1, 2 => 1, 3 => -1 }, label => 1 },
+            +{ feature => +{ 1 => -1, 3 => -1 }, label => 1 },
         ],
     );
 }
