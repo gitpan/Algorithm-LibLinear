@@ -33,4 +33,4 @@ requires:
 resources:
   license: http://opensource.org/licenses/mit-license.php
   repository: git://github.com/sekia/Algorithm-LibLinear.git
-version: 0.07
+version: 0.08
