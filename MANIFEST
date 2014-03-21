@@ -20,13 +20,12 @@ lib/Algorithm/LibLinear.pm
 lib/Algorithm/LibLinear/DataSet.pm
 lib/Algorithm/LibLinear/FeatureScaling.pm
 lib/Algorithm/LibLinear/Model.pm
-lib/Algorithm/LibLinear/ScalingParameter.pm
 lib/Algorithm/LibLinear/Types.pm
 Makefile.PL
 MANIFEST			This list of files
 META.yml
 README
-src/lib_linear.xs
+src/liblinear.xs
 src/liblinear/blas/blas.h
 src/liblinear/blas/blasp.h
 src/liblinear/blas/daxpy.c
@@ -42,7 +41,6 @@ t/Algorithm/LibLinear.t
 t/Algorithm/LibLinear/DataSet.t
 t/Algorithm/LibLinear/FeatureScaling.t
 t/Algorithm/LibLinear/Problem.t
-t/Algorithm/LibLinear/ScalingParameter.t
 t/Algorithm/LibLinear/TrainingParameter.t
 xt/01_podspell.t
 xt/02_perlcritic.t

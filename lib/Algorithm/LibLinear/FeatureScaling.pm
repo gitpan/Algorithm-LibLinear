@@ -198,7 +198,7 @@ Algorithm::LibLinear::FeatureScaling
     upper_bound => 10,
   );
   my $scale = Algorithm::LibLinear::FeatureScaling->load(
-      filename => '/path/to/file',
+    filename => '/path/to/file',
   );
   
   my $scaled_feature = $scale->scale(feature => +{ 1 => 30, 2 => - 25, ... });
@@ -214,15 +214,15 @@ Algorithm::LibLinear::FeatureScaling
 
 =head1 DESCRIPTION
 
-Support vector classification is actually just a calculation of inner product of feature vector and normal vector of a separation hyperplane. If some elements in feature vectors have greater dynamic range than others, they can have stronger influence on the final calculation result.
+Support vector classification is actually just a calculation of inner product of feature vector and normal vector of separation hyperplane. If some elements in feature vectors have greater dynamic range than others, they can have stronger influence on the final calculation result.
 
-For example, consider a normal vector to be C<{ 1 1 1 }> and feature vectors to be classified are C<{ -2 10 5 }>, C<{ 5 -50 0 }> and C<{ 10 100 10 }>. Inner products of these normal vector and feature vectors are 13, -45 and 120 respectively. Obviously 2nd elements of them have wider dynamic range than 1st and 3rd ones and dominate calculation result.
+For example, consider a normal vector to be C<{ 1 1 1 }> and feature vectors to be classified are C<{ -2 10 5 }>, C<{ 5 -50 0 }> and C<{ 10 100 10 }>. Inner products of these normal vector and feature vectors are 13, -45 and 120 respectively. Obviously 2nd elements of the feature vectors have wider dynamic range than 1st and 3rd ones and dominate calculation result.
 
 To avoid such a problem, scaling elements of vectors to make they have same dynamic range is very important. This module provides such vector scaling functionality. If you are familiar with the LIBSVM distribution, you can see this is a library version of C<svm-scale> command written in Perl.
 
 =head1 METHODS
 
-=head1 new(data_set => $data_set | min_max_values => \@min_max_values [, lower_bound => 0.0] [, upper_bound => 1.0])
+=head2 new(data_set => $data_set | min_max_values => \@min_max_values [, lower_bound => 0.0] [, upper_bound => 1.0])
 
 Constructor. You can set some named parameters below. At least C<data_set> or C<min_max_values> is required.
 
@@ -263,7 +263,7 @@ Dump the scaling parameter as C<svm-scale>'s format.
 
 =head2 save(filename => $path | fh => \*FH)
 
-Writes result of |as_string| to a file.
+Writes result of C<as_string> out to a file.
 
 =head2 scale(data_set => $data_set | feature => \%feature | labeled_data => \%labeled_data)
 
