@@ -146,6 +146,15 @@ CODE:
 OUTPUT:
     RETVAL
 
+double
+ll_bias(self, label)
+    struct model *self;
+    int label;
+CODE:
+    RETVAL = get_decfun_bias(self, label);
+OUTPUT:
+    RETVAL
+
 AV *
 ll_class_labels(self)
     struct model *self;
@@ -158,11 +167,29 @@ CODE:
 OUTPUT:
     RETVAL
 
+double
+ll_coefficient(self, feature, label)
+    struct model *self;
+    int feature;
+    int label;
+CODE:
+    RETVAL = get_decfun_coef(self, feature, label);
+OUTPUT:
+    RETVAL
+
 bool
 ll_is_probability_model(self)
     struct model *self;
 CODE:
     RETVAL = check_probability_model(self);
+OUTPUT:
+    RETVAL
+
+bool
+ll_is_regression_model(self)
+    struct model *self;
+CODE:
+    RETVAL = check_regression_model(self);
 OUTPUT:
     RETVAL
 
@@ -393,7 +420,7 @@ MODULE = Algorithm::LibLinear  PACKAGE = Algorithm::LibLinear::Problem  PREFIX =
 PROTOTYPES: DISABLE
 
 struct problem *
-ll_new(klass, labels, features, bias = -1)
+ll_new(klass, labels, features, bias)
     const char *klass;
     AV *labels;
     AV *features;
